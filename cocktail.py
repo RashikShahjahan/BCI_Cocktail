@@ -90,28 +90,25 @@ def acquire_data(inlet,fs):
 
 
 
-
+#Load data
 fs1,audio2 = read("IVR.wav")
 fs2,audio1 = read("Airline-2020.wav")
 eeg1 = np.load("mydata0.npy")
 eeg2 = np.load("mydata1.npy")
 
-
+# Preprocessing
 Y_sc1 = preprocess_eeg(eeg1)
 Y_sc2 = preprocess_eeg(eeg2)
-
 X_sc1 = preprocess_audio(audio1).reshape(-1,1)
 X_sc2 = preprocess_audio(audio2).reshape(-1,1)
 
-
+#Find CCA coefficients
 left_attended = cca_fit(X_sc1, Y_sc1)
 left_unattended = cca_fit(X_sc2, Y_sc1)
 right_attended = cca_fit(X_sc1, Y_sc2)
 right_unattended = cca_fit(X_sc2, Y_sc2)
-print(left_attended)
-print(left_unattended)
-print(right_attended)
-print(right_unattended)
+
+# Fit SVM model
 dataset_left = np.vstack((left_attended,left_unattended))
 dataset_right = np.vstack((right_attended,right_unattended))
 labels = [1,0]
