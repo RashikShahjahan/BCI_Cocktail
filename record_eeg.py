@@ -66,18 +66,18 @@ if __name__ == "__main__":
 
     
     """ RECORD TRAINING DATA """
-    for i in range(1,5):
-        
-        print('\nFocus on left speaker!\n')
-
-        Thread(target = play).start()
-        Thread(target = acquire_data, args= (index_channel,inlet, fs,"mydata_left"+str(i)+".npy")).start()
-
-        time.sleep(60)
     
-        print('\nFocus on right speaker!\n')
-        Thread(target = play).start()
-        Thread(target = acquire_data, args= (index_channel,inlet, fs,"mydata_right"+str(i)+".npy")).start()
+        
+    print('\nFocus on left speaker!\n')
+    
+    Thread(target = play).start()
+    Thread(target = acquire_data, args= (index_channel,inlet, fs,"mydata_left"+str(i)+".npy")).start()
 
-        time.sleep(60)
+    time.sleep(60)
+    
+    print('\nFocus on right speaker!\n')
+    Thread(target = play).start()
+    Thread(target = acquire_data, args= (index_channel,inlet, fs,"mydata_right"+str(i)+".npy")).start()
+
+    time.sleep(60)
    
