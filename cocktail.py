@@ -54,14 +54,10 @@ def preprocess_eeg(p):
 def cca_fit(X, Y):
     cca = CCA(n_components=1)
     cca.fit(X,Y)
-    #X,Y = cca.transform(X,Y)
     
     X = list(itertools.islice(X, 10))
     Y = list(itertools.islice(Y, 10))
-    #X= np.array(X).reshape(1,-1)
-    #Y= np.array(Y)
-    #return np.vstack((X,Y))
-    #return np.corrcoef(X,Y)[1,0]
+    
     return cca.score(X,Y)
 
 def svm_fit(data,labels):
@@ -172,8 +168,6 @@ if __name__ == "__main__":
     result1 = model_left.predict(data)
     result2 = model_right.predict(data)
 
-    print(attended)
-    print(unattended)
     print(result1)
     print(result2)
               
